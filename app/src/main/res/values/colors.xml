@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimaryLite">#ff5c8d</color>
+    <color name="colorPrimary">#d81b60</color>
+    <color name="colorPrimaryDark">#a00037</color>
+    <color name="colorAccentLite">#6affe2</color>
+    <color name="colorAccent">#17e0b0</color>
+    <color name="colorAccentDark">#00ad81</color>
+    <color name="fab_icon">#ffffff</color>
+
+    <color name="logon_background">@color/colorPrimary</color>
+    <color name="logo_splash">#FFFFFF</color>
+</resources>

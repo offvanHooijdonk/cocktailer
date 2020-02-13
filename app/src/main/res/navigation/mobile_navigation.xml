@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/item_cocktails">
+
+    <fragment
+        android:id="@+id/item_cocktails"
+        android:name="by.off.cocktailer.ui.cocktail.list.CocktailListFragment"
+        android:label="@string/item_cocktails"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/item_my_collection"
+        android:name="by.off.cocktailer.ui.dashboard.DashboardFragment"
+        android:label="@string/item_my_collection"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/item_my_bar"
+        android:name="by.off.cocktailer.ui.notifications.NotificationsFragment"
+        android:label="@string/item_my_bar"
+        tools:layout="@layout/fragment_notifications" />
+</navigation>
