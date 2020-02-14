@@ -21,5 +21,5 @@ fun setRefreshing(refreshLayout: SwipeRefreshLayout, isRefreshing: Boolean) {
 
 @BindingAdapter("cocktailLargeImage")
 fun setLargeCocktailImage(img: ImageView, url: String?) {
-    img.loadLargeImage(url, R.drawable.ic_cocktail_24) // todo add better placeholder/fallback
+    img.loadLargeImage(url, R.drawable.ic_cocktail_placeholder) // todo add better placeholder/fallback
 }

@@ -24,6 +24,5 @@ data class DrinkModel(
     override val id: Long,
     override val name: String,
     val alcoholVolume: Float,
-    val volume: Int,
     val imageUrl: String?
 ): Ingredient

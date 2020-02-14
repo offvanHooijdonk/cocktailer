@@ -2,6 +2,7 @@ package by.off.cocktailer.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "Cocktails")
@@ -12,19 +13,28 @@ data class CocktailModel(
     val name: String,
     val instruction: String,
     val imageUrl: String? = null
-)
+) {
+    @Ignore
+    val components = mutableListOf<CocktailComponentModel>()
+}
 
 @Entity(tableName = "Components")
 data class CocktailComponentModel(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(index = true)
     val id: Long,
+    val cocktailId: Long,
     val ingredientId: Long,
     val ingredientType: ComponentType,
-    val cocktailId: Long,
     val amount: Float,
     val unit: ComponentUnit
-)
+) {
+    @Ignore
+    var ingredient: IngredientModel? = null
+
+    @Ignore
+    var drink: DrinkModel? = null
+}
 
 enum class ComponentType {
     INGREDIENT, DRINK;

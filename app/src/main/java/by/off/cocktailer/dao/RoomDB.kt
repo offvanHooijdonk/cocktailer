@@ -25,5 +25,5 @@ abstract class RoomDB : RoomDatabase() {
     abstract fun cocktailDao(): CocktailDao
     abstract fun cocktailComponentDao(): CocktailComponentDao
     abstract fun drinkDao(): DrinkDao
-    abstract fun ingridientDao(): IngridientDao
+    abstract fun ingredientDao(): IngredientDao
 }
