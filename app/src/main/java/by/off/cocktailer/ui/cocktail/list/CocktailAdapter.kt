@@ -6,10 +6,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import by.off.cocktailer.R
 import by.off.cocktailer.databinding.ItemCocktailBinding
-import by.off.cocktailer.model.CocktailModel
+import by.off.cocktailer.model.CocktailWithComponents
 
 class CocktailAdapter : RecyclerView.Adapter<CocktailAdapter.ViewHolder>() {
-    private val list = mutableListOf<CocktailModel>()
+    private val list = mutableListOf<CocktailWithComponents>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
@@ -23,14 +23,14 @@ class CocktailAdapter : RecyclerView.Adapter<CocktailAdapter.ViewHolder>() {
         holder.bind(list[position])
     }
 
-    fun update(newData: List<CocktailModel>) {
+    fun update(newData: List<CocktailWithComponents>) {
         list.apply { clear(); addAll(newData) }
         notifyDataSetChanged()
     }
 
     class ViewHolder(private val binding: ItemCocktailBinding, private val viewModel: ItemCocktailViewModel) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(model: CocktailModel) {
-            viewModel.cocktail.set(model)
+        fun bind(model: CocktailWithComponents) {
+            viewModel.entity.set(model)
             binding.model = viewModel
         }
     }

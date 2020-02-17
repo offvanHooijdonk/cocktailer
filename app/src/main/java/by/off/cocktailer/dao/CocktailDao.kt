@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import by.off.cocktailer.model.CocktailModel
+import by.off.cocktailer.model.CocktailWithComponents
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -13,7 +14,7 @@ interface CocktailDao {
     fun insert(model: CocktailModel): Long
 
     @Query("select * from Cocktails order by name")
-    fun listAll(): Flow<List<CocktailModel>>
+    fun listAll(): Flow<List<CocktailWithComponents>>
 
     @Query("delete from Cocktails")
     fun clearAll()

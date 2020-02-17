@@ -30,7 +30,7 @@
 
                 <ImageView
                     android:id="@+id/img_cocktail_photo"
-                    cocktailLargeImage="@{model.cocktail.imageUrl}"
+                    cocktailLargeImage="@{model.entity.cocktail.imageUrl}"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:scaleType="centerCrop"
@@ -52,7 +52,7 @@
                         style="@style/ItemTitleText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@{model.cocktail.name}"
+                        android:text="@{model.entity.cocktail.name}"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:text="@tools:sample/lorem" />
 
@@ -63,14 +63,14 @@
                         android:layout_marginTop="4dp"
                         android:ellipsize="end"
                         android:maxLines="2"
-                        android:text="@{model.cocktail.instruction}"
+                        android:text="@{model.entity.cocktail.instruction}"
                         app:layout_constraintTop_toBottomOf="@id/txt_cocktail_name"
                         tools:text="@tools:sample/lorem/random" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{model.cocktail.components.toString()}"
+                        android:text="@{model.entity.components.toString()}"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/txt_instructions"
                         tools:text="1" />

@@ -5,12 +5,12 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import by.off.cocktailer.R
-import by.off.cocktailer.model.CocktailModel
+import by.off.cocktailer.model.CocktailWithComponents
 import by.off.cocktailer.service.loadLargeImage
 import by.off.cocktailer.ui.cocktail.list.CocktailAdapter
 
 @BindingAdapter("cocktailsList")
-fun setCocktailsList(rv: RecyclerView, list: List<CocktailModel>) {
+fun setCocktailsList(rv: RecyclerView, list: List<CocktailWithComponents>) {
     (rv.adapter as? CocktailAdapter)?.update(list)
 }
 

@@ -17,7 +17,7 @@ import by.off.cocktailer.model.IngredientModel
 @TypeConverters(by.off.cocktailer.dao.TypeConverters::class)
 abstract class RoomDB : RoomDatabase() {
     companion object {
-        private const val DB_NAME = "cocktails-db-0.02"
+        private const val DB_NAME = "cocktails-db-0.03"
 
         fun create(context: Context) = Room.databaseBuilder(context, RoomDB::class.java, DB_NAME).build()
     }

@@ -8,7 +8,6 @@ import by.off.cocktailer.model.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class CocktailRepo(
@@ -56,7 +55,7 @@ class CocktailRepo(
         listOf(
             IngredientModel(INGR_LEMON, "Lemon"),
             IngredientModel(INGR_CELERY, "Celery"),
-            IngredientModel(INGR_TOMATO, "Tomato Juice"),
+            IngredientModel(INGR_TOMATO_JUICE, "Tomato Juice"),
             IngredientModel(INGR_TABASCO, "Tabasco"),
             IngredientModel(INGR_ICE, "Ice"),
             IngredientModel(INGR_CREAM, "Cream"),
@@ -81,43 +80,32 @@ class CocktailRepo(
     private fun initCocktailComponents() {
         cocktailComponentDao.clearAll()
         listOf(
-            CocktailComponentModel(0, CT_MARY, DRINK_VODKA, ComponentType.DRINK, 50f, ComponentUnit.GRAM),
-            CocktailComponentModel(0, CT_MARY, INGR_TOMATO, ComponentType.INGREDIENT, 120f, ComponentUnit.GRAM),
-            CocktailComponentModel(0, CT_MARY, INGR_CELERY, ComponentType.INGREDIENT, 15f, ComponentUnit.GRAM),
-            CocktailComponentModel(0, CT_MARY, INGR_TABASCO, ComponentType.INGREDIENT, 1f, ComponentUnit.GRAM),
-            CocktailComponentModel(0, CT_MARY, INGR_ICE, ComponentType.INGREDIENT, 380f, ComponentUnit.GRAM),
-            CocktailComponentModel(0, CT_RUS, DRINK_VODKA, ComponentType.DRINK, 30f, ComponentUnit.GRAM),
-            CocktailComponentModel(0, CT_RUS, DRINK_KAHLUA, ComponentType.DRINK, 30f, ComponentUnit.GRAM),
-            CocktailComponentModel(0, CT_RUS, INGR_CREAM, ComponentType.INGREDIENT, 30f, ComponentUnit.GRAM),
-            CocktailComponentModel(0, CT_RUS, INGR_ICE, ComponentType.INGREDIENT, 120f, ComponentUnit.GRAM),
-            CocktailComponentModel(0, CT_SUNR, DRINK_TEQUILA, ComponentType.DRINK, 50f, ComponentUnit.GRAM),
-            CocktailComponentModel(0, CT_SUNR, INGR_GRENADINE, ComponentType.INGREDIENT, 10f, ComponentUnit.GRAM),
-            CocktailComponentModel(0, CT_SUNR, INGR_ORANGE_JUICE, ComponentType.INGREDIENT, 150f, ComponentUnit.GRAM),
-            CocktailComponentModel(0, CT_SUNR, INGR_ICE, ComponentType.INGREDIENT, 180f, ComponentUnit.GRAM),
-            CocktailComponentModel(0, CT_OLD, DRINK_BOURBON, ComponentType.DRINK, 50f, ComponentUnit.GRAM),
-            CocktailComponentModel(0, CT_OLD, INGR_ORANGE, ComponentType.INGREDIENT, 40f, ComponentUnit.GRAM),
-            CocktailComponentModel(0, CT_OLD, INGR_CANE_SUGAR, ComponentType.INGREDIENT, 5f, ComponentUnit.GRAM),
-            CocktailComponentModel(0, CT_OLD, INGR_ICE, ComponentType.INGREDIENT, 5f, ComponentUnit.GRAM)
+            cocktailComponentBuilder(CT_MARY).drink(DRINK_VODKA, 50f).build(),
+            cocktailComponentBuilder(CT_MARY).ingredient(INGR_TOMATO_JUICE, 120f).build(),
+            cocktailComponentBuilder(CT_MARY).ingredient(INGR_CELERY, 15f).build(),
+            cocktailComponentBuilder(CT_MARY).ingredient(INGR_TABASCO, 1f).build(),
+            cocktailComponentBuilder(CT_MARY).ingredient(INGR_ICE, 380f).build(),
+            cocktailComponentBuilder(CT_RUS).drink(DRINK_VODKA, 30f).build(),
+            cocktailComponentBuilder(CT_RUS).drink(DRINK_KAHLUA, 30f).build(),
+            cocktailComponentBuilder(CT_RUS).ingredient(INGR_CREAM, 30f).build(),
+            cocktailComponentBuilder(CT_RUS).ingredient(INGR_ICE, 120f).build(),
+            cocktailComponentBuilder(CT_SUNR).drink(DRINK_TEQUILA, 50f).build(),
+            cocktailComponentBuilder(CT_SUNR).ingredient(INGR_GRENADINE, 10f).build(),
+            cocktailComponentBuilder(CT_SUNR).ingredient(INGR_ORANGE_JUICE, 150f).build(),
+            cocktailComponentBuilder(CT_SUNR).ingredient(INGR_ICE, 180f).build(),
+            cocktailComponentBuilder(CT_OLD).drink(DRINK_BOURBON, 50f).build(),
+            cocktailComponentBuilder(CT_OLD).ingredient(INGR_ORANGE, 40f).build(),
+            cocktailComponentBuilder(CT_OLD).ingredient(INGR_CANE_SUGAR, 5f).build(),
+            cocktailComponentBuilder(CT_OLD).ingredient(INGR_ICE, 5f).build()
         ).forEach { cocktailComponentDao.insert(it) }
     }
 
     fun listAll() = cocktailDao.listAll()
-        .map { list ->
+        /*.map { list ->
             list.onEach {
-                it.components.addAll(
-                    cocktailComponentDao.getComponentsForCocktail(it.id).map { c ->
-                        when (c.ingredientType) {
-                            ComponentType.INGREDIENT -> {
-                                c.ingredient = ingredientDao.getById(c.ingredientId)
-                            }
-                            ComponentType.DRINK -> {
-                                c.drink = drinkDao.getById(c.ingredientId)
-                            }
-                        }
-                        c
-                    })
+                it.components.addAll(cocktailComponentDao.getComponentsForCocktail(it.id))
             }
-        }.flowOn(Dispatchers.IO)
+        }*/.flowOn(Dispatchers.IO)
 
     companion object {
         private const val CT_MARY = 1L
@@ -127,7 +115,7 @@ class CocktailRepo(
 
         private const val INGR_LEMON = 1L
         private const val INGR_CELERY = 2L
-        private const val INGR_TOMATO = 3L
+        private const val INGR_TOMATO_JUICE = 3L
         private const val INGR_TABASCO = 4L
         private const val INGR_ICE = 5L
         private const val INGR_CREAM = 6L
@@ -143,3 +131,5 @@ class CocktailRepo(
         private const val DRINK_BOURBON = 5L
     }
 }
+
+fun cocktailComponentBuilder(cocktailId: Long) = CocktailComponentModel.Builder(cocktailId)

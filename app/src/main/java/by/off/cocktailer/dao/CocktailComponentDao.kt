@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import by.off.cocktailer.model.CocktailComponentIngredients
 import by.off.cocktailer.model.CocktailComponentModel
 
 @Dao
@@ -13,7 +14,7 @@ interface CocktailComponentDao {
     fun insert(model: CocktailComponentModel)
 
     @Query("select * from Components where cocktailId = :cocktailId")
-    fun getComponentsForCocktail(cocktailId: Long): List<CocktailComponentModel>
+    fun getComponentsForCocktail(cocktailId: Long): List<CocktailComponentIngredients>
 
     @Query("delete from Components")
     fun clearAll()
