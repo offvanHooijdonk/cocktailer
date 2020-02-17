@@ -3,11 +3,15 @@
     <color name="colorPrimaryLite">#ff5c8d</color>
     <color name="colorPrimary">#d81b60</color>
     <color name="colorPrimaryDark">#a00037</color>
-    <color name="colorAccentLite">#6affe2</color>
-    <color name="colorAccent">#17e0b0</color>
-    <color name="colorAccentDark">#00ad81</color>
+    <color name="colorSecondaryLite">#6affe2</color>
+    <color name="colorSecondary">#17e0b0</color>
+    <color name="colorSecondaryDark">#00ad81</color>
     <color name="fab_icon">#ffffff</color>
 
     <color name="logon_background">@color/colorPrimary</color>
     <color name="logo_splash">#FFFFFF</color>
+
+    <color name="swipe_refresh_1">@color/colorPrimaryLite</color>
+    <color name="swipe_refresh_2">@color/colorSecondary</color>
+    <color name="swipe_refresh_3">@color/colorSecondaryDark</color>
 </resources>

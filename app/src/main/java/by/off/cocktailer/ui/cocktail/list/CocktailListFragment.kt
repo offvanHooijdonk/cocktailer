@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import by.off.cocktailer.R
 import by.off.cocktailer.databinding.CocktailsListBinding
+import by.off.cocktailer.ui.setupTheme
 import kotlinx.android.synthetic.main.fr_cocktails_list.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -24,6 +25,8 @@ class CocktailListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         rv_cocktails.adapter = CocktailAdapter()
+
+        refresh_layout.setupTheme()
         refresh_layout.setOnRefreshListener {
             viewModel.reloadData()
         }
