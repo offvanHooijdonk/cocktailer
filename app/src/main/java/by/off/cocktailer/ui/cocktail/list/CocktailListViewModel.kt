@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import by.off.cocktailer.model.CocktailWithComponents
 import by.off.cocktailer.repo.CocktailRepo
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onEach
 
 class CocktailListViewModel(private val cocktailRepo: CocktailRepo) : ViewModel() {
@@ -26,8 +27,8 @@ class CocktailListViewModel(private val cocktailRepo: CocktailRepo) : ViewModel(
         cocktailRepo.listAll()
             .onEach {
                 list.apply { clear(); addAll(it) }
-                progressLoading.set(false)
             }
+            .onCompletion { progressLoading.set(false) }
             .launchIn(viewModelScope)
     }
 }

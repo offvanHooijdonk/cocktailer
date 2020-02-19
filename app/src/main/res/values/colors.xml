@@ -14,4 +14,19 @@
     <color name="swipe_refresh_1">@color/colorPrimaryLite</color>
     <color name="swipe_refresh_2">@color/colorSecondary</color>
     <color name="swipe_refresh_3">@color/colorSecondaryDark</color>
+
+    <integer-array name="chip_colors">
+        <item>@color/md_blue_500</item>
+        <item>@color/md_amber_900</item>
+        <item>@color/md_red_600</item>
+        <item>@color/md_pink_900</item>
+        <item>@color/md_purple_400</item>
+        <item>@color/md_green_600</item>
+        <item>@color/md_indigo_500</item>
+        <item>@color/md_teal_A700</item>
+        <item>@color/md_cyan_700</item>
+        <item>@color/md_deep_orange_600</item>
+        <item>@color/md_deep_purple_600</item>
+        <item>@color/colorSecondaryDark</item>
+    </integer-array>
 </resources>

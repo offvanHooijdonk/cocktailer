@@ -48,7 +48,7 @@ data class CocktailComponentModel(
             this.apply {
                 drinkId = id
                 ingredientId = null
-                this.amount = amount
+                this.amount = gram
                 this.unit = ComponentUnit.GRAM
             }
 
