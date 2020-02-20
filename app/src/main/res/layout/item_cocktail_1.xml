@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data class="ItemCocktailBinding">
+
+        <variable
+            name="model"
+            type="by.off.cocktailer.ui.cocktail.list.ItemCocktailViewModel" />
+    </data>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:paddingBottom="4dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="2dp"
+            app:cardUseCompatPadding="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/item_horizontal_margin"
+                android:paddingTop="@dimen/item_vertical_margin"
+                android:paddingEnd="@dimen/item_horizontal_margin"
+                android:paddingBottom="@dimen/item_vertical_margin">
+
+                <TextView
+                    android:id="@+id/txt_cocktail_name"
+                    style="@style/ItemTitleText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@{model.entity.cocktail.name}"
+                    app:layout_constraintEnd_toStartOf="@id/txt_volume"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@sample/cocktails" />
+
+                <TextView
+                    android:id="@+id/txt_volume"
+                    volume="@{model.entity.cocktail.volume}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBaseline_toBaselineOf="@id/txt_cocktail_name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:text="200g" />
+
+                <com.google.android.flexbox.FlexboxLayout
+                    android:id="@+id/block_tags"
+                    tags="@{model.entity.tags}"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:flexDirection="row"
+                    app:flexWrap="wrap"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txt_cocktail_name" />
+
+
+                <com.google.android.flexbox.FlexboxLayout
+                    android:id="@+id/block_components"
+                    components="@{model.entity.components}"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:flexDirection="row"
+                    app:flexWrap="wrap"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/block_tags" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </FrameLayout>
+</layout>

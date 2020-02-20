@@ -14,7 +14,7 @@ data class IngredientModel(
     @PrimaryKey/*(autoGenerate = true)*/
     @ColumnInfo(index = true)
     override val id: Long,
-    override val name: String
+    override val name: String // todo rename all to `title`
 ): Ingredient
 
 @Entity(tableName = "Drinks")
@@ -22,7 +22,7 @@ data class DrinkModel(
     @PrimaryKey/*(autoGenerate = true)*/
     @ColumnInfo(index = true)
     override val id: Long,
-    override val name: String,
+    override val name: String, // todo rename all to `title`
     val alcoholVolume: Float,
     val imageUrl: String?
 ): Ingredient

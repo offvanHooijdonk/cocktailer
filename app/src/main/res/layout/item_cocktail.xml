@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data class="ItemCocktailBinding">
+    <data class="ItemCocktailOldBinding">
 
         <variable
             name="model"
@@ -14,71 +14,105 @@
         android:layout_height="wrap_content"
         android:clipChildren="false"
         android:clipToPadding="false"
-        android:paddingBottom="8dp">
+        android:paddingBottom="4dp">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="8dp"
             app:cardCornerRadius="4dp"
+            app:cardElevation="2dp"
             app:cardUseCompatPadding="true">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/img_cocktail_photo"
-                    cocktailLargeImage="@{model.entity.cocktail.imageUrl}"
-                    android:layout_width="match_parent"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_cocktail_photo"
+                    android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:scaleType="centerCrop"
-                    app:layout_constraintDimensionRatio="16:9"
+                    app:cardCornerRadius="4dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintDimensionRatio="3:4"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:src="@drawable/ic_cocktail_24" />
+                    app:layout_constraintWidth_percent="0.3">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingStart="@dimen/item_horizontal_margin"
-                    android:paddingTop="@dimen/activity_vertical_margin"
-                    android:paddingEnd="@dimen/item_horizontal_margin"
-                    android:paddingBottom="@dimen/item_vertical_margin"
-                    app:layout_constraintTop_toBottomOf="@id/img_cocktail_photo">
-
-                    <TextView
-                        android:id="@+id/txt_cocktail_name"
-                        style="@style/ItemTitleText"
+                    <ImageView
+                        android:id="@+id/img_cocktail_photo"
+                        cocktailLargeImage="@{model.entity.cocktail.imageUrl}"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@{model.entity.cocktail.name}"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:text="@tools:sample/lorem" />
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
 
-                    <!--<TextView
-                        android:id="@+id/txt_instructions"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:text="@{model.entity.cocktail.instruction}"
-                        app:layout_constraintTop_toBottomOf="@id/txt_cocktail_name"
-                        tools:text="@tools:sample/lorem/random" />-->
+                        tools:src="@drawable/cocktail_sample" />
+                </com.google.android.material.card.MaterialCardView>
 
-                    <com.google.android.flexbox.FlexboxLayout
-                        ingredients="@{model.entity.components}"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        app:flexDirection="row"
-                        app:flexWrap="wrap"
-                        app:layout_constraintTop_toBottomOf="@id/txt_cocktail_name">
+                <TextView
+                    android:id="@+id/txt_cocktail_name"
+                    style="@style/ItemTitleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/item_horizontal_margin"
+                    android:layout_marginTop="@dimen/item_vertical_margin"
+                    android:layout_marginEnd="@dimen/item_horizontal_margin"
+                    android:text="@{model.entity.cocktail.name}"
+                    app:layout_constraintStart_toEndOf="@id/card_cocktail_photo"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@sample/cocktails" />
 
-                    </com.google.android.flexbox.FlexboxLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
 
+                <com.google.android.flexbox.FlexboxLayout
+                    android:id="@+id/block_tags"
+                    tags="@{model.entity.tags}"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/item_horizontal_margin"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="@dimen/item_horizontal_margin"
+                    app:flexDirection="row"
+                    app:flexWrap="wrap"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/card_cocktail_photo"
+                    app:layout_constraintTop_toBottomOf="@id/txt_cocktail_name" />
+
+                <com.google.android.flexbox.FlexboxLayout
+                    android:id="@+id/block_components"
+                    components="@{model.entity.components}"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/item_horizontal_margin"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="@dimen/item_horizontal_margin"
+                    app:flexDirection="row"
+                    app:flexWrap="wrap"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/card_cocktail_photo"
+                    app:layout_constraintTop_toBottomOf="@id/block_tags" />
+
+                <TextView
+                    android:id="@+id/txt_volume"
+                    volume="@{model.entity.cocktail.volume}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="@dimen/item_horizontal_margin"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/block_components"
+                    tools:text="200g" />
+
+                <com.google.android.material.chip.Chip
+                    volume="@{model.entity.cocktail.volume}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/md_white_1000"
+                    android:alpha="0.8"
+                    app:layout_constraintStart_toStartOf="@id/card_cocktail_photo"
+                    app:chipBackgroundColor="@color/md_blue_grey_300"
+                    app:layout_constraintBottom_toBottomOf="@id/card_cocktail_photo"
+                    app:layout_constraintEnd_toEndOf="@id/card_cocktail_photo"
+                    tools:text="200g" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
     </FrameLayout>

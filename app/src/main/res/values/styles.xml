@@ -35,6 +35,23 @@
         <item name="android:textSize">@dimen/item_title_size</item>
     </style>
 
+    <style name="ChipCocktailIngredient">
+        <item name="android:textColor">#ffffff</item>
+        <item name="chipBackgroundColor">@color/cocktail_item_ingredient</item>
+        <item name="chipMinTouchTargetSize">0dp</item>
+        <item name="chipEndPadding">0dp</item>
+        <item name="chipStartPadding">0dp</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+    </style>
+
+    <style name="ChipCocktailIngredient.Stroke" parent="ChipCocktailIngredient">
+        <item name="android:textColor">@color/cocktail_item_ingredient</item>
+        <item name="chipBackgroundColor">#ffffff</item>
+        <item name="chipStrokeColor">@color/cocktail_item_ingredient</item>
+        <item name="chipStrokeWidth">1dp</item>
+    </style>
+
     <style name="DividerLight">
         <item name="android:alpha">0.12</item>
         <item name="android:background">#000000</item>

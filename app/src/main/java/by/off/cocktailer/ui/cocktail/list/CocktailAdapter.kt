@@ -13,7 +13,7 @@ class CocktailAdapter : RecyclerView.Adapter<CocktailAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
-            DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_cocktail, parent, false),
+            DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_cocktail_1, parent, false),
             ItemCocktailViewModel()
         )
 

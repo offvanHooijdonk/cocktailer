@@ -8,4 +8,5 @@ val daoModule = module {
     single { get<RoomDB>().cocktailComponentDao() }
     single { get<RoomDB>().drinkDao() }
     single { get<RoomDB>().ingredientDao() }
+    single { get<RoomDB>().tagDao() }
 }

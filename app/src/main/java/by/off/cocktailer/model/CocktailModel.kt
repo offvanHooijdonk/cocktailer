@@ -5,18 +5,21 @@ import androidx.room.*
 @Entity(tableName = "Cocktails")
 data class CocktailModel(
     @PrimaryKey/*(autoGenerate = true)*/
-    @ColumnInfo(index = true)
+    @ColumnInfo(index = true, name = "cocktailId")
     val id: Long,
     val name: String,
     val instruction: String,
+    val volume: Float,
     val imageUrl: String? = null
 )
 
 data class CocktailWithComponents(
     @Embedded
     val cocktail: CocktailModel,
-    @Relation(entity = CocktailComponentModel::class, parentColumn = "id", entityColumn = "cocktailId")
-    val components: List<CocktailComponentIngredients>
+    @Relation(entity = CocktailComponentModel::class, parentColumn = "cocktailId", entityColumn = "cocktailId")
+    val components: List<CocktailComponentIngredients>,
+    @Relation(parentColumn = "cocktailId", entityColumn = "tagId", associateBy = Junction(CocktailsTagModel::class))
+    val tags: List<TagModel>
 )
 
 @Entity(tableName = "Components")
@@ -58,14 +61,30 @@ data class CocktailComponentModel(
 
 data class CocktailComponentIngredients(
     @Embedded
-    val component: CocktailComponentModel,
+    val component: CocktailComponentModel, // todo try order by here
     @Relation(entity = IngredientModel::class, parentColumn = "ingredientId", entityColumn = "id")
     val ingredient: IngredientModel? = null,
     @Relation(entity = DrinkModel::class, parentColumn = "drinkId", entityColumn = "id")
     val drink: DrinkModel? = null
 )
 
-enum class ComponentType {
+@Entity(tableName = "CocktailTags")
+data class TagModel(
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(index = true, name = "tagId")
+    val id: Long,
+    val title: String
+)
+
+@Entity(tableName = "TagsForCocktails", primaryKeys = ["cocktailId", "tagId"])
+data class CocktailsTagModel(
+    @ColumnInfo(index = true)
+    val cocktailId: Long,
+    @ColumnInfo(index = true)
+    val tagId: Long
+)
+
+/*enum class ComponentType {
     INGREDIENT, DRINK;
 
     companion object {
@@ -76,7 +95,7 @@ enum class ComponentType {
 
     val code: Int
         get() = this.ordinal
-}
+}*/
 
 enum class ComponentUnit {
     UNIT, GRAM, PORTION;

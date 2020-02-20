@@ -4,4 +4,6 @@
     <string name="item_cocktails">Cocktails</string>
     <string name="item_my_collection">Collection</string>
     <string name="item_my_bar">Bar</string>
+
+    <string name="unit_gram_short">%sg</string>
 </resources>

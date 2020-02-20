@@ -1,9 +1,6 @@
 package by.off.cocktailer.repo
 
-import by.off.cocktailer.dao.CocktailComponentDao
-import by.off.cocktailer.dao.CocktailDao
-import by.off.cocktailer.dao.DrinkDao
-import by.off.cocktailer.dao.IngredientDao
+import by.off.cocktailer.dao.*
 import by.off.cocktailer.model.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -14,7 +11,8 @@ class CocktailRepo(
     private val cocktailDao: CocktailDao,
     private val cocktailComponentDao: CocktailComponentDao,
     private val drinkDao: DrinkDao,
-    private val ingredientDao: IngredientDao
+    private val ingredientDao: IngredientDao,
+    private val tagDao: TagDao
 ) {
 
     fun initData() {
@@ -23,6 +21,7 @@ class CocktailRepo(
             initIngredients()
             initDrinks()
             initCocktailComponents()
+            initCocktailTags()
         }
     }
 
@@ -30,19 +29,19 @@ class CocktailRepo(
         cocktailDao.clearAll()
         listOf(
             CocktailModel(
-                CT_MARY, "Bloody Mary", "Blah blah",
+                CT_MARY, "Bloody Mary", "Blah blah", 120f,
                 "https://cdn1.foodviva.com/static-content/food-images/cocktail-recipes/best-bloody-mary-cocktail-recipe/best-bloody-mary-cocktail-recipe.jpg"
             ),
             CocktailModel(
-                CT_RUS, "White Russian", "Blah blah",
+                CT_RUS, "White Russian", "Blah blah", 200f,
                 "http://s3-eu-west-1.amazonaws.com/jamieoliverprod/_int/rdb2/upload/1219_1_1403274925_lrg.jpg"
             ),
             CocktailModel(
-                CT_SUNR, "Tequila Sunrise", "Blah blah",
+                CT_SUNR, "Tequila Sunrise", "Blah blah", 180f,
                 "https://cdn.diffords.com/contrib/stock-images/2017/8/49/201746c438fdcb534ea73fd518baa2a0e386.jpg"
             ),
             CocktailModel(
-                CT_OLD, "Old Fashioned", "Blah blah",
+                CT_OLD, "Old Fashioned", "Blah blah", 240f,
                 "https://i1.wp.com/www.foodrepublic.com/wp-content/uploads/2011/04/oldfashioned.jpg"
             )
         ).forEach {
@@ -100,6 +99,38 @@ class CocktailRepo(
         ).forEach { cocktailComponentDao.insert(it) }
     }
 
+    private fun initCocktailTags() {
+        tagDao.clearAllCocktailTags()
+        tagDao.clearAllTags()
+
+        listOf(
+            TagModel(TAG_SWEET, "Sweet"),
+            TagModel(TAG_SOUR, "Sour"),
+            TagModel(TAG_SOUR_SWEET, "Sour-sweet"),
+            TagModel(TAG_FRESH, "Fresh"),
+            TagModel(TAG_LONG, "Long"),
+            TagModel(TAG_SHOT, "Shot"),
+            TagModel(TAG_STRONG, "Strong"),
+            TagModel(TAG_CLASSIC, "Classic"),
+            TagModel(TAG_CITRUS, "Citrus")
+        ).forEach { tagDao.insertTag(it) }
+
+        listOf(
+            CocktailsTagModel(CT_MARY, TAG_SOUR),
+            CocktailsTagModel(CT_MARY, TAG_STRONG),
+            CocktailsTagModel(CT_RUS, TAG_SWEET),
+            CocktailsTagModel(CT_RUS, TAG_LONG),
+            CocktailsTagModel(CT_RUS, TAG_STRONG),
+            CocktailsTagModel(CT_SUNR, TAG_SOUR),
+            CocktailsTagModel(CT_SUNR, TAG_CLASSIC),
+            CocktailsTagModel(CT_SUNR, TAG_CITRUS),
+            CocktailsTagModel(CT_OLD, TAG_SOUR_SWEET),
+            CocktailsTagModel(CT_OLD, TAG_STRONG),
+            CocktailsTagModel(CT_OLD, TAG_CLASSIC),
+            CocktailsTagModel(CT_OLD, TAG_CITRUS)
+        ).forEach { tagDao.insertCocktailTag(it) }
+    }
+
     fun listAll() = cocktailDao.listAll()
         /*.map { list ->
             list.onEach {
@@ -129,6 +160,16 @@ class CocktailRepo(
         private const val DRINK_KAHLUA = 3L
         private const val DRINK_TEQUILA = 4L
         private const val DRINK_BOURBON = 5L
+
+        private const val TAG_SWEET = 1L
+        private const val TAG_SOUR = 2L
+        private const val TAG_SOUR_SWEET = 3L
+        private const val TAG_FRESH = 4L
+        private const val TAG_LONG = 5L
+        private const val TAG_SHOT = 6L
+        private const val TAG_STRONG = 7L
+        private const val TAG_CLASSIC = 8L
+        private const val TAG_CITRUS = 9L
     }
 }
 

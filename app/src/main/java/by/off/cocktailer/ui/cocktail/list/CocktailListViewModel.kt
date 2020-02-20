@@ -26,9 +26,8 @@ class CocktailListViewModel(private val cocktailRepo: CocktailRepo) : ViewModel(
     private fun loadData() {
         cocktailRepo.listAll()
             .onEach {
-                list.apply { clear(); addAll(it) }
+                list.apply { clear(); addAll(it); progressLoading.set(false) }
             }
-            .onCompletion { progressLoading.set(false) }
             .launchIn(viewModelScope)
     }
 }

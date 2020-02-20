@@ -1,7 +1,7 @@
 package by.off.cocktailer.dao
 
 import androidx.room.TypeConverter
-import by.off.cocktailer.model.ComponentType
+//import by.off.cocktailer.model.ComponentType
 import by.off.cocktailer.model.ComponentUnit
 
 class TypeConverters {
@@ -11,9 +11,9 @@ class TypeConverters {
     @TypeConverter
     fun componentUnitToCode(unit: ComponentUnit) = unit.code
 
-    @TypeConverter
+    /*@TypeConverter
     fun codeToComponentType(code: Int): ComponentType = ComponentType.fromCode(code)
 
     @TypeConverter
-    fun componentTypeToCode(unit: ComponentType) = unit.code
+    fun componentTypeToCode(unit: ComponentType) = unit.code*/
 }
